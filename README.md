@@ -1,6 +1,6 @@
-# Electron_With_Rust_Template
+# Last Music
 
-Electron + Rust + TypeScript + react for GUI Application
+Electron + Rust + TypeScript + react for Music Application
 
 ## Usage
 
