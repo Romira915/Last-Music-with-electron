@@ -10,12 +10,11 @@ interface IProps {
 const SkipPreviousButton: React.FC<IProps> = props => {
     return (
         <Tooltip title="Back">
-
-        <StyleIconButton>
-            <IconButton onClick={props.onClick}>
-                <SkipPreviousIcon />
-            </IconButton>
-        </StyleIconButton>
+            <StyleIconButton>
+                <IconButton edge={'end'} onClick={props.onClick}>
+                    <SkipPreviousIcon />
+                </IconButton>
+            </StyleIconButton>
         </Tooltip>
     );
 };

@@ -11,7 +11,7 @@ const RepeatButton: React.FC<IProps> = props => {
     return (
         <StyleIconButton>
             <Tooltip title="Loop">
-                <IconButton>
+                <IconButton edge={'end'} onClick={props.onClick}>
                     <RepeatIcon />
                 </IconButton>
             </Tooltip>

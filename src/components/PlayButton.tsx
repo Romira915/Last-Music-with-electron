@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
 import { IconButton, Tooltip } from '@material-ui/core';
-import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import { StyleIconButton } from '../styles/style';
 
 interface IProps {
@@ -11,8 +11,8 @@ const PlayButton: React.FC<IProps> = props => {
     return (
         <StyleIconButton>
             <Tooltip title="Play">
-                <IconButton>
-                    <PlayCircleOutlineIcon fontSize={'large'} />
+                <IconButton edge={'end'} onClick={props.onClick}>
+                    <PlayArrowIcon fontSize={'large'} />
                 </IconButton>
             </Tooltip>
         </StyleIconButton>

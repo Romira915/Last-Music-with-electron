@@ -12,7 +12,7 @@ const DarkTheme = createMuiTheme({
         button: {
             textTransform: 'none',
         },
-        fontSize: 16,
+        fontSize: 14,
         fontFamily: [
             'Noto Sans JP',
             'sans-serif',

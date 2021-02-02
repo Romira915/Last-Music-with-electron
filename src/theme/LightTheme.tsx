@@ -6,6 +6,13 @@ const LightTheme = createMuiTheme({
         button: {
             textTransform: 'none',
         },
+        fontSize: 14,
+        fontFamily: [
+            'Noto Sans JP',
+            'sans-serif',
+            'Noto Serif JP',
+            'serif',
+        ].join(','),
     },
     props: {
         MuiTextField: {

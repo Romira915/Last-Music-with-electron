@@ -11,7 +11,7 @@ const ShuffleButton: React.FC<IProps> = props => {
     return (
         <StyleIconButton>
             <Tooltip title="Shuffle">
-                <IconButton>
+                <IconButton onClick={props.onClick}>
                     <ShuffleIcon />
                 </IconButton>
             </Tooltip>

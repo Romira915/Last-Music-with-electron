@@ -11,7 +11,7 @@ const StopButton: React.FC<IProps> = props => {
     return (
         <Tooltip title="Stop">
             <StyleIconButton>
-                <IconButton onClick={props.onClick}>
+                <IconButton edge={'end'} onClick={props.onClick}>
                     <StopIcon />
                 </IconButton>
             </StyleIconButton>
