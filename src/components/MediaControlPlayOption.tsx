@@ -12,7 +12,7 @@ import ShuffleButton from './ShuffleButton';
 const MediaControlPlayOption: React.FC = () => {
     return (
         <StyleMediaControlPlayOptionGroup>
-            <Grid container>
+            <Grid container direction={'row'} alignItems={'center'}>
                 <Grid item>
                     <RepeatButton />
                 </Grid>

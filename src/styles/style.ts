@@ -3,7 +3,8 @@ import styled, { css } from 'styled-components';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 export const StyleIconButton = styled.div`
-    ${(props: { theme: Theme }) => css``}
+    ${(props: { theme: Theme }) => css`
+    `}
 `;
 
 export const StyleMediaSeekBar = styled.div`
@@ -26,24 +27,24 @@ export const StyleMediaControlPanel = styled.div`
 export const StyleMediaControlPrimaryButtonGroup = styled.div`
     ${(props: { theme: Theme }) => css`
         min-width: 183px;
-        width: 183px;
     `}
 `;
 
 export const StyleMediaControlSeekBarGroup = styled.div`
     ${(props: { theme: Theme }) => css`
         flex: 1;
+        min-width: 140px;
     `}
 `;
 
 export const StyleMediaControlVolumeGroup = styled.div`
     ${(props: { theme: Theme }) => css`
-        width: 107px;
+        min-width: 107px;
     `}
 `;
 
 export const StyleMediaControlPlayOptionGroup = styled.div`
     ${(props: { theme: Theme }) => css`
-        width: 84px;
+        min-width: 84px;
     `}
 `;
