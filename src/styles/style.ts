@@ -40,11 +40,17 @@ export const StyleMediaControlSeekBarGroup = styled.div`
 export const StyleMediaControlVolumeGroup = styled.div`
     ${(props: { theme: Theme }) => css`
         min-width: 107px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     `}
 `;
 
 export const StyleMediaControlPlayOptionGroup = styled.div`
     ${(props: { theme: Theme }) => css`
         min-width: 84px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     `}
 `;
