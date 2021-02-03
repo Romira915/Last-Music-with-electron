@@ -1,5 +1,5 @@
 import { actionCreatorFactory } from 'typescript-fsa';
-import ISettings from '../states/ISettings';
+import Settings from '../states/settings';
 
 // action creator を作成する
 // 引数は、アクションのグループごとに一意
@@ -8,6 +8,6 @@ const actionCreator = actionCreatorFactory('settings-action');
 
 // アクションの定義
 // 引数は（同じ creator から生成される）アクションごとに一意
-export const changeSettingsAction = actionCreator<Partial<ISettings>>(
+export const changeSettingsAction = actionCreator<Partial<Settings>>(
     'change-settings',
 );

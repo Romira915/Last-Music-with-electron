@@ -1,13 +1,13 @@
 import React, { useMemo, useCallback } from 'react';
 import { IconButton, Tooltip } from '@material-ui/core';
 import StopIcon from '@material-ui/icons/Stop';
-import { StyleIconButton } from '../styles/style';
+import { StyleIconButton } from '../../styles/style';
 
-interface IProps {
+interface Props {
     onClick?: () => void;
 }
 
-const StopButton: React.FC<IProps> = props => {
+const StopButton: React.FC<Props> = props => {
     return (
         <Tooltip title="Stop">
             <StyleIconButton>

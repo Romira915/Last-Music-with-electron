@@ -4,7 +4,7 @@ import {
     StyleIconButton,
     StyleMediaControlPlayOptionGroup,
     StyleMediaControlPrimaryButtonGroup,
-} from '../styles/style';
+} from '../../styles/style';
 import { Repeat, Shuffle } from '@material-ui/icons';
 import RepeatButton from './RepeatButton';
 import ShuffleButton from './ShuffleButton';

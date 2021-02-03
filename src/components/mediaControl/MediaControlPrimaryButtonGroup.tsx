@@ -6,7 +6,7 @@ import SkipNextButton from './SkipNextButton';
 import SkipPreviousButton from './SkipPreviousButton';
 import {
     StyleMediaControlPrimaryButtonGroup,
-} from '../styles/style';
+} from '../../styles/style';
 
 const MediaControlPrimaryButtonGroup: React.FC = () => {
     return (

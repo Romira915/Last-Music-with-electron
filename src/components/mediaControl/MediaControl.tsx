@@ -11,7 +11,7 @@ import MediaControlPrimaryButtonGroup from './MediaControlPrimaryButtonGroup';
 import MediaControlSeekBar from './MediaControlSeekBar';
 import MediaControlVolume from './MediaControlVolume';
 import MediaControlPlayOption from './MediaControlPlayOption';
-import { StyleMediaControlPanel } from '../styles/style';
+import { StyleMediaControlPanel } from '../../styles/style';
 
 const MediaControlPanel: React.FC = () => {
     return (

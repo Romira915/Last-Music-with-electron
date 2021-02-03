@@ -1,15 +1,15 @@
 import { ThemeConsumer } from 'styled-components';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { changeSettingsAction } from '../actions/SettingsActions';
-import ISettings from '../states/ISettings';
+import { changeSettingsAction } from '../actions/settingsActions';
+import Settings from '../states/settings';
 import DarkTheme from '../theme/DarkTheme';
 
 // Stateの初期値
-const initSettings: ISettings = {
+const initSettings: Settings = {
     theme: DarkTheme,
 };
 
-const settingsReducer = reducerWithInitialState<ISettings>(initSettings)
+const settingsReducer = reducerWithInitialState<Settings>(initSettings)
     // Action ごとに`.case`をメソッドチェーンでつなぐ
     // 1番目の引数は、アクション、2番めが処理の関数
     // 処理の関数の引数は、1番目が変更前の State、2番めが Action の値

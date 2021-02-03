@@ -1,13 +1,13 @@
 import React, { useMemo, useCallback } from 'react';
 import { IconButton, Tooltip } from '@material-ui/core';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import { StyleIconButton } from '../styles/style';
+import { StyleIconButton } from '../../styles/style';
 
-interface IProps {
+interface Props {
     onClick?: () => void;
 }
 
-const SkipPreviousButton: React.FC<IProps> = props => {
+const SkipPreviousButton: React.FC<Props> = props => {
     return (
         <Tooltip title="Back">
             <StyleIconButton>

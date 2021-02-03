@@ -1,13 +1,13 @@
 import React, { useMemo, useCallback } from 'react';
 import { IconButton, Tooltip } from '@material-ui/core';
-import { StyleIconButton } from '../styles/style';
+import { StyleIconButton } from '../../styles/style';
 import RepeatIcon from '@material-ui/icons/Repeat';
 
-interface IProps {
+interface Props {
     onClick?: () => void;
 }
 
-const RepeatButton: React.FC<IProps> = props => {
+const RepeatButton: React.FC<Props> = props => {
     return (
         <StyleIconButton>
             <Tooltip title="Loop">

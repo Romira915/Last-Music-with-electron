@@ -14,7 +14,7 @@ import {
     StyleIconButton,
     StyleMediaControlVolumeGroup,
     StyleMediaVolumeBar,
-} from '../styles/style';
+} from '../../styles/style';
 
 const MediaControlVolume: React.FC = () => {
     return (

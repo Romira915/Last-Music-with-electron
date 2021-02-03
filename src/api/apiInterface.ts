@@ -1,4 +1,4 @@
-export default interface IAPI {
+export default interface ApiInterface {
     sample: (arg: string) => void;
     hello: () => void;
 }
@@ -6,6 +6,6 @@ export default interface IAPI {
 declare global {
     // eslint-disable-next-line @typescript-eslint/interface-name-prefix
     interface Window {
-        api: IAPI;
+        api: ApiInterface;
     }
 }

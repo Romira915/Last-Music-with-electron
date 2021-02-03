@@ -8,6 +8,6 @@ import { Theme } from '@material-ui/core';
 // // 以下は type Card = "clubs" | "diamonds" | "hearts" | "spades" と同じ
 // type Theme = typeof Theme[keyof typeof Theme];
 
-export default interface ISettings {
+export default interface Settings {
     theme: Theme;
 }

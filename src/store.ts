@@ -1,10 +1,10 @@
 import { combineReducers, createStore } from 'redux';
-import { IState } from './states/IState';
+import { State } from './states/state';
 import userReducer from './reducers/UserReducer';
 import settingsReducer from './reducers/SettingsReducer';
 
 // 複数の reducer を束ねる
-const combinedReducer = combineReducers<IState>({
+const combinedReducer = combineReducers<State>({
     // --(a)
     user: userReducer,
     settings: settingsReducer,

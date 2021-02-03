@@ -3,7 +3,7 @@ import { Box, Container, Grid, Slider, Typography } from '@material-ui/core';
 import {
     StyleMediaControlSeekBarGroup,
     StyleMediaSeekBar,
-} from '../styles/style';
+} from '../../styles/style';
 
 const MediaControlSeekBar: React.FC = () => {
     return (

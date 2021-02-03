@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeUserAction } from '../actions/UserActions';
-import { IState } from '../states/IState';
-import IUser from '../states/IUser';
+import { State } from '../states/state';
+import User from '../states/user';
 import TextBox from './TextBox';
 
 // データは、Storeから渡されるので、プロパティは必要ありません。
 const UserForm: React.FC = () => {
     // useSelector でステートの変更を受け取れます。
-    const { name, count } = useSelector<IState, IUser>(a => a.user); // -- (a)
+    const { name, count } = useSelector<State, User>(a => a.user); // -- (a)
     const dispatch = useDispatch(); // -- (b)
     const onNameChange = useCallback((value: string) => {
         // 名前を変更したとき(タイプするたび)のイベント

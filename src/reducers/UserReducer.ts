@@ -1,14 +1,14 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { changeUserAction } from '../actions/UserActions';
-import IUser from '../states/IUser';
+import User from '../states/user';
 
 // Stateの初期値
-const initUser: IUser = {
+const initUser: User = {
     count: 0,
     name: '',
 };
 
-const userReducer = reducerWithInitialState<IUser>(initUser)
+const userReducer = reducerWithInitialState<User>(initUser)
     // Action ごとに`.case`をメソッドチェーンでつなぐ
     // 1番目の引数は、アクション、2番めが処理の関数
     // 処理の関数の引数は、1番目が変更前の State、2番めが Action の値

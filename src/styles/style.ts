@@ -1,10 +1,8 @@
 import { fade, IconButton, Theme } from '@material-ui/core';
 import styled, { css } from 'styled-components';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 
 export const StyleIconButton = styled.div`
-    ${(props: { theme: Theme }) => css`
-    `}
+    ${(props: { theme: Theme }) => css``}
 `;
 
 export const StyleMediaSeekBar = styled.div`
@@ -21,6 +19,7 @@ export const StyleMediaControlPanel = styled.div`
     ${(props: { theme: Theme }) => css`
         white-space: nowrap;
         display: flex;
+        margin-bottom: 16px;
     `}
 `;
 
@@ -52,5 +51,15 @@ export const StyleMediaControlPlayOptionGroup = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
+    `}
+`;
+
+export const StyleLibraryTabGroup = styled.div`
+    ${(props: { theme: Theme }) => css`
+        width: 17em;
+        min-height: 34em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     `}
 `;

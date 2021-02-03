@@ -1,5 +1,5 @@
 import { actionCreatorFactory } from 'typescript-fsa';
-import IUser from '../states/IUser';
+import User from '../states/user';
 
 // action creator を作成する
 // 引数は、アクションのグループごとに一意
@@ -8,4 +8,4 @@ const actionCreator = actionCreatorFactory('user-action');
 
 // アクションの定義
 // 引数は（同じ creator から生成される）アクションごとに一意
-export const changeUserAction = actionCreator<Partial<IUser>>('change-user');
+export const changeUserAction = actionCreator<Partial<User>>('change-user');

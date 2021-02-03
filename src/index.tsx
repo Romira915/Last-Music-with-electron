@@ -14,29 +14,37 @@ import {
     CssBaseline,
     ButtonGroup,
     Checkbox,
+    AppBar,
+    Toolbar,
+    Tabs,
+    Tab,
 } from '@material-ui/core';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import {
+    createMuiTheme,
+    ThemeProvider as MaterialThemeProvider,
+} from '@material-ui/core/styles';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import Store from './Store';
-import UserForm from './components/UserForm';
-import PlayButton from './components/PlayButton';
-import api from './api/api';
-import ISettings from './states/ISettings';
-import { IState } from './states/IState';
-import { changeSettingsAction } from './actions/SettingsActions';
+import {} from './api/api';
+import Settings from './states/settings';
+import { State } from './states/state';
+import { changeSettingsAction } from './actions/settingsActions';
 import DarkTheme from './theme/DarkTheme';
 import LightTheme from './theme/LightTheme';
-import MediaControlPanel from './components/MediaControl';
+import MediaControlPanel from './components/mediaControl/MediaControl';
+import MenuIcon from '@material-ui/icons/Menu';
+import LibraryTab from './components/LibraryTab';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
-const container = document.getElementById('root');
+const container = document.getElementById('app');
 
 const show = () => {
     window.api.hello();
     console.log('Button Click');
 };
 
-const Root: React.FC = props => {
-    const { theme } = useSelector<IState, ISettings>(a => a.settings);
+const App: React.FC = props => {
+    const { theme } = useSelector<State, Settings>(a => a.settings);
     const dispatch = useDispatch();
 
     const onThemeChange = useCallback(() => {
@@ -48,20 +56,24 @@ const Root: React.FC = props => {
     }, [theme]);
 
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline>
-                <Button onClick={onThemeChange}>ダークモード</Button>
-                {props.children}
-            </CssBaseline>
-        </ThemeProvider>
+        <MaterialThemeProvider theme={theme}>
+            <StyledThemeProvider theme={theme}>
+                <CssBaseline>
+                    <Button onClick={onThemeChange}>ダークモード</Button>
+                    {props.children}
+                </CssBaseline>
+            </StyledThemeProvider>
+        </MaterialThemeProvider>
     );
 };
 
 ReactDOM.render(
     <Provider store={Store}>
-        <Root>
-            <MediaControlPanel></MediaControlPanel>
-        </Root>
+        <App>
+            <MediaControlPanel />
+
+            <LibraryTab />
+        </App>
     </Provider>,
     container,
 );
