@@ -50,3 +50,13 @@ header-includes:
 # 外部設計
 
 [外部設計書_EDD.pdf](EDD.pdf)
+
+# 命名規則
+
+　命名規則は[@tbl:NamingRule]および[TypeScript スタイルガイド](https://typescript-jp.gitbook.io/deep-dive/styleguide)に則る．
+
+| 対象                | スタイル   |
+| :------------------ | :--------- |
+| .tsxファイル名      | PascalCase |
+| .tsx コンポーネント | PascalCase |
+:用語 {#tbl:NamingRule}

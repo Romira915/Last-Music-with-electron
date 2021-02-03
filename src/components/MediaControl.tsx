@@ -15,7 +15,7 @@ import { StyleMediaControlPanel } from '../styles/style';
 
 const MediaControlPanel: React.FC = () => {
     return (
-        <Paper>
+        <Paper elevation={8} square>
             <StyleMediaControlPanel>
                 <MediaControlPrimaryButtonGroup />
                 <MediaControlSeekBar />

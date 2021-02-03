@@ -3,9 +3,9 @@
 	"tasks": [
 		{
 			"type": "npm",
-			"script": "debug.w",
+			"script": "debug.watch",
 			"problemMatcher": [],
-			"label": "yarn: debug.w",
+			"label": "yarn: debug.watch",
 			"group": {
 				"kind": "build",
 				"isDefault": true
