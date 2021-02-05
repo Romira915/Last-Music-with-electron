@@ -1,12 +1,24 @@
-import { fade, IconButton, Theme } from '@material-ui/core';
+import {
+    CardMedia,
+    fade,
+    Grid,
+    IconButton,
+    List,
+    ListItem,
+    Paper,
+    Theme,
+} from '@material-ui/core';
 import styled, { css } from 'styled-components';
 
-export const StyleIconButton = styled.div`
-    ${(props: { theme: Theme }) => css``}
-`;
+const contentsSpacing = '4px';
+const librarylistWidth = '17em';
 
-export const StyleMediaSeekBar = styled.div`
-    ${(props: { theme: Theme }) => css``}
+export const StyleApp = styled.div`
+    ${(props: { theme: Theme }) => css`
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    `}
 `;
 
 export const StyleMediaVolumeBar = styled.div`
@@ -15,11 +27,11 @@ export const StyleMediaVolumeBar = styled.div`
     `}
 `;
 
-export const StyleMediaControlPanel = styled.div`
+export const StyleMediaControlPanel = styled(Paper)`
     ${(props: { theme: Theme }) => css`
-        white-space: nowrap;
         display: flex;
-        margin-bottom: 16px;
+        align-items: center;
+        margin-bottom: ${contentsSpacing};
     `}
 `;
 
@@ -39,27 +51,42 @@ export const StyleMediaControlSeekBarGroup = styled.div`
 export const StyleMediaControlVolumeGroup = styled.div`
     ${(props: { theme: Theme }) => css`
         min-width: 107px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     `}
 `;
 
 export const StyleMediaControlPlayOptionGroup = styled.div`
     ${(props: { theme: Theme }) => css`
         min-width: 84px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     `}
 `;
 
-export const StyleLibraryTabGroup = styled.div`
+export const StyleLibraryListGroup = styled.div`
     ${(props: { theme: Theme }) => css`
-        width: 17em;
-        min-height: 34em;
+        width: ${librarylistWidth};
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        flex: 1;
+    `}
+`;
+
+export const StyleLibraryList = styled(List)`
+    ${(props: { theme: Theme }) => css`
+        background-color: ${props.theme.palette.primary.light};
+        flex: 1 0 12em;
+        overflow: auto;
+    `}
+`;
+
+export const StyleNestListItem = styled(ListItem)`
+    ${(props: { theme: Theme }) => css`
+        padding-left: ${props.theme.spacing(8)}px;
+    `}
+`;
+
+export const StyleCardMedia = styled(CardMedia)`
+    ${(props: { theme: Theme }) => css`
+        margin-top: ${contentsSpacing};
+        width: ${librarylistWidth};
+        height: ${librarylistWidth};
     `}
 `;

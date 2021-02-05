@@ -1,9 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
 import { Box, Container, Grid, Slider, Typography } from '@material-ui/core';
-import {
-    StyleMediaControlSeekBarGroup,
-    StyleMediaSeekBar,
-} from '../../styles/style';
+import { StyleMediaControlSeekBarGroup } from '../../styles/style';
 
 const MediaControlSeekBar: React.FC = () => {
     return (
@@ -16,7 +13,7 @@ const MediaControlSeekBar: React.FC = () => {
                         justify={'space-between'}
                         spacing={1}>
                         <Grid item>
-                            <Typography id="MusicProgress">Title</Typography>
+                            <Typography id="MusicTitle">Title</Typography>
                         </Grid>
                         <Grid item>
                             <Typography id="MusicProgress">
@@ -26,14 +23,12 @@ const MediaControlSeekBar: React.FC = () => {
                     </Grid>
                 </Grid>
                 <Grid item>
-                    <StyleMediaSeekBar>
-                        <Slider
-                            defaultValue={0}
-                            aria-label={'MusicProgress'}
-                            aria-labelledby="MusicProgress"
-                            step={0.1}
-                        />
-                    </StyleMediaSeekBar>
+                    <Slider
+                        defaultValue={0}
+                        aria-label={'MusicProgress'}
+                        aria-labelledby="MusicProgress"
+                        step={0.1}
+                    />
                 </Grid>
             </Grid>
         </StyleMediaControlSeekBarGroup>

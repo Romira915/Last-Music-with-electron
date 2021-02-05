@@ -15,14 +15,12 @@ import { StyleMediaControlPanel } from '../../styles/style';
 
 const MediaControlPanel: React.FC = () => {
     return (
-        <Paper elevation={8} square>
-            <StyleMediaControlPanel>
-                <MediaControlPrimaryButtonGroup />
-                <MediaControlSeekBar />
-                <MediaControlVolume />
-                <MediaControlPlayOption />
-            </StyleMediaControlPanel>
-        </Paper>
+        <StyleMediaControlPanel elevation={8} square>
+            <MediaControlPrimaryButtonGroup />
+            <MediaControlSeekBar />
+            <MediaControlVolume />
+            <MediaControlPlayOption />
+        </StyleMediaControlPanel>
     );
 };
 

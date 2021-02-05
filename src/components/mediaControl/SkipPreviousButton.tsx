@@ -1,7 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
 import { IconButton, Tooltip } from '@material-ui/core';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
-import { StyleIconButton } from '../../styles/style';
 
 interface Props {
     onClick?: () => void;
@@ -10,11 +9,9 @@ interface Props {
 const SkipPreviousButton: React.FC<Props> = props => {
     return (
         <Tooltip title="Back">
-            <StyleIconButton>
-                <IconButton edge={'end'} onClick={props.onClick}>
-                    <SkipPreviousIcon />
-                </IconButton>
-            </StyleIconButton>
+            <IconButton edge={'end'} onClick={props.onClick}>
+                <SkipPreviousIcon />
+            </IconButton>
         </Tooltip>
     );
 };

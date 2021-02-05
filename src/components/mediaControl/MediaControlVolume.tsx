@@ -11,7 +11,6 @@ import {
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import RepeatIcon from '@material-ui/icons/Repeat';
 import {
-    StyleIconButton,
     StyleMediaControlVolumeGroup,
     StyleMediaVolumeBar,
 } from '../../styles/style';
@@ -26,13 +25,11 @@ const MediaControlVolume: React.FC = () => {
                 spacing={0}
                 direction={'row'}>
                 <Grid item>
-                    <StyleIconButton>
-                        <Tooltip title="Mute">
-                            <IconButton>
-                                <VolumeUpIcon fontSize={'small'} />
-                            </IconButton>
-                        </Tooltip>
-                    </StyleIconButton>
+                    <Tooltip title="Mute">
+                        <IconButton>
+                            <VolumeUpIcon fontSize={'small'} />
+                        </IconButton>
+                    </Tooltip>
                 </Grid>
                 <Grid item>
                     <StyleMediaVolumeBar>

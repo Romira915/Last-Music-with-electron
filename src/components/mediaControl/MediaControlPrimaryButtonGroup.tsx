@@ -4,9 +4,7 @@ import PauseButton from './StopButton';
 import PlayButton from './PlayButton';
 import SkipNextButton from './SkipNextButton';
 import SkipPreviousButton from './SkipPreviousButton';
-import {
-    StyleMediaControlPrimaryButtonGroup,
-} from '../../styles/style';
+import { StyleMediaControlPrimaryButtonGroup } from '../../styles/style';
 
 const MediaControlPrimaryButtonGroup: React.FC = () => {
     return (

@@ -33,8 +33,9 @@ import DarkTheme from './theme/DarkTheme';
 import LightTheme from './theme/LightTheme';
 import MediaControlPanel from './components/mediaControl/MediaControl';
 import MenuIcon from '@material-ui/icons/Menu';
-import LibraryTab from './components/LibraryTab';
+import LibraryList from './components/LibraryList';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import { StyleApp, StyleCardMedia } from './styles/style';
 
 const container = document.getElementById('app');
 
@@ -59,8 +60,10 @@ const App: React.FC = props => {
         <MaterialThemeProvider theme={theme}>
             <StyledThemeProvider theme={theme}>
                 <CssBaseline>
-                    <Button onClick={onThemeChange}>ダークモード</Button>
-                    {props.children}
+                    <StyleApp>
+                        <Button onClick={onThemeChange}>ダークモード</Button>
+                        {props.children}
+                    </StyleApp>
                 </CssBaseline>
             </StyledThemeProvider>
         </MaterialThemeProvider>
@@ -72,7 +75,9 @@ ReactDOM.render(
         <App>
             <MediaControlPanel />
 
-            <LibraryTab />
+            <LibraryList />
+
+            <StyleCardMedia title="Album Artwork" image="../demoalbumart.jpg" />
         </App>
     </Provider>,
     container,

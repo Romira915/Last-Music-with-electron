@@ -1,10 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
 import { Grid, IconButton, Tooltip } from '@material-ui/core';
-import {
-    StyleIconButton,
-    StyleMediaControlPlayOptionGroup,
-    StyleMediaControlPrimaryButtonGroup,
-} from '../../styles/style';
+import { StyleMediaControlPlayOptionGroup } from '../../styles/style';
 import { Repeat, Shuffle } from '@material-ui/icons';
 import RepeatButton from './RepeatButton';
 import ShuffleButton from './ShuffleButton';
