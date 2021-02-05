@@ -124,6 +124,7 @@ const LibraryList: React.FC<Props> = props => {
                     <ListItemText primary="再生回数トップ" />
                 </ListItem>
             </StyleLibraryList>
+            <StyleCardMedia title="Album Artwork" image="../demoalbumart.jpg" />
         </StyleLibraryListGroup>
     );
 };

@@ -15,7 +15,9 @@ const librarylistWidth = '17em';
 
 export const StyleApp = styled.div`
     ${(props: { theme: Theme }) => css`
+        height: 100%;
         min-height: 100vh;
+        max-height: 100vh;
         display: flex;
         flex-direction: column;
     `}
@@ -63,6 +65,8 @@ export const StyleMediaControlPlayOptionGroup = styled.div`
 export const StyleLibraryListGroup = styled.div`
     ${(props: { theme: Theme }) => css`
         width: ${librarylistWidth};
+        min-width: ${librarylistWidth};
+        max-width: ${librarylistWidth};
         display: flex;
         flex-direction: column;
         flex: 1;
@@ -88,5 +92,26 @@ export const StyleCardMedia = styled(CardMedia)`
         margin-top: ${contentsSpacing};
         width: ${librarylistWidth};
         height: ${librarylistWidth};
+    `}
+`;
+
+export const StyleLibraryPanel = styled.div`
+    ${(props: { theme: Theme }) => css`
+        display: flex;
+        flex: 1;
+    `}
+`;
+
+export const StyleLibraryContentsWrapper = styled.div`
+    ${(props: { theme: Theme }) => css`
+        overflow-y: scroll;
+        min-height: 5em;
+        margin-left: ${contentsSpacing};
+    `}
+`;
+
+export const StyleLibraryContents = styled.div`
+    ${(props: { theme: Theme }) => css`
+        height: 0;
     `}
 `;

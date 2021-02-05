@@ -36,6 +36,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import LibraryList from './components/LibraryList';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { StyleApp, StyleCardMedia } from './styles/style';
+import LibraryPanel from './components/LibraryPanel';
 
 const container = document.getElementById('app');
 
@@ -75,9 +76,7 @@ ReactDOM.render(
         <App>
             <MediaControlPanel />
 
-            <LibraryList />
-
-            <StyleCardMedia title="Album Artwork" image="../demoalbumart.jpg" />
+            <LibraryPanel />
         </App>
     </Provider>,
     container,
