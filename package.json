@@ -32,7 +32,8 @@
     "watch.webpack": "webpack --watch",
     "watch.tsc": "tsc --watch",
     "watch": "run-p watch.webpack watch.tsc",
-    "devtools": "react-devtools"
+    "devtools": "react-devtools",
+    "release": "run-p build package:win"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -98,8 +99,7 @@
     "files": [
       "node_modules/**/*",
       "native/index.node",
-      "build/*",
-      "src/*"
+      "build/**/*"
     ]
   }
 }

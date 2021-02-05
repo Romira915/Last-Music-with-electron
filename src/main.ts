@@ -2,9 +2,9 @@ import { app, BrowserWindow, ipcMain, dialog, Menu, session } from 'electron';
 import path from 'path';
 import os from 'os';
 
-require('electron-reload')(path.join(process.cwd(), 'build'), {
-    electron: path.join(process.cwd(), 'node_modules', '.bin', 'electron.cmd'),
-});
+// require('electron-reload')(path.join(process.cwd(), 'build'), {
+//     electron: path.join(process.cwd(), 'node_modules', '.bin', 'electron.cmd'),
+// });
 
 const native = require('../native');
 
