@@ -1,9 +1,17 @@
 import { app, BrowserWindow, ipcMain, dialog, Menu, session } from 'electron';
 import path from 'path';
+import * as isDev from 'electron-is-dev';
 
-require('electron-reload')(path.join(process.cwd(), 'build'), {
-    electron: path.join(process.cwd(), 'node_modules', '.bin', 'electron.cmd'),
-});
+if (isDev) {
+    require('electron-reload')(path.join(process.cwd(), 'build'), {
+        electron: path.join(
+            process.cwd(),
+            'node_modules',
+            '.bin',
+            'electron.cmd',
+        ),
+    });
+}
 
 const native = require('../native');
 
@@ -20,6 +28,7 @@ const createWindow = (): void => {
             nodeIntegrationInWorker: false,
             contextIsolation: true,
             preload: path.join(__dirname, 'preload.js'),
+            devTools: isDev,
         },
     });
 
@@ -31,8 +40,10 @@ const createWindow = (): void => {
         mainWindow = null;
     });
 
-    // 開発者ツールを起動する
-    mainWindow.webContents.openDevTools();
+    if (isDev) {
+        // 開発者ツールを起動する
+        mainWindow.webContents.openDevTools();
+    }
 };
 
 // Electronの起動準備が終わったら、ウィンドウを作成する。
