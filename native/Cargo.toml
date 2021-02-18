@@ -1,18 +1,21 @@
 [package]
-name = "native"
-version = "0.1.0"
 authors = ["Romira915 <40430090+Romira915@users.noreply.github.com>"]
-license = "MIT"
 build = "build.rs"
 edition = "2018"
 exclude = ["artifacts.json", "index.node"]
+license = "MIT"
+name = "native"
+version = "0.1.0"
 
 [lib]
-name = "native"
 crate-type = ["cdylib"]
+name = "native"
 
 [build-dependencies]
-neon-build = "0.6.0"
+neon-build = "0.7.1"
 
 [dependencies]
-neon = "0.6.0"
+cpal = "0.13.1"
+music_manager = {path = "./music-manager"}
+neon = "0.7.1"
+rodio = "0.13.0"

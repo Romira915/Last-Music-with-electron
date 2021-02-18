@@ -9,9 +9,15 @@ const hello = () => {
     ipcRenderer.send('hello', 'rend');
 };
 
+const playMusicTs = (arg: string) => {
+    console.log(arg);
+    ipcRenderer.send('play', arg);
+};
+
 const Api: ApiInterface = {
     sample,
     hello,
+    playMusicTs,
 };
 
 export default Api;

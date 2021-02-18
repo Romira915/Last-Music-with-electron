@@ -41,7 +41,7 @@ import LibraryPanel from './components/LibraryPanel';
 const container = document.getElementById('app');
 
 const show = () => {
-    window.api.hello();
+    window.Api.hello();
     console.log('Button Click');
 };
 

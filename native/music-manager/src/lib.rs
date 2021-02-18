@@ -1,7 +1,14 @@
 #[cfg(test)]
 mod tests;
 
-use std::path::{Path, PathBuf};
+use cpal::Device;
+use cpal::{traits::HostTrait, Host};
+use rodio::{DeviceTrait, Source};
+use std::{
+    fs::File,
+    io::BufReader,
+    path::{Path, PathBuf},
+};
 use thiserror::Error;
 use tokio::fs;
 
@@ -25,3 +32,20 @@ pub async fn get_music_file_path(dir: &str, extensions: &str) -> Result<PathBuf,
 }
 
 async fn get_file_path_with_extension(dir: &str, extensions: &str) {}
+
+pub fn play_music(path: &str) {
+    let host = cpal::default_host();
+    let mut devices = host.output_devices().unwrap();
+    let device = devices
+        .find(|d| d.name().unwrap().contains("CABLE"))
+        .unwrap();
+    let (_stream, stream_handle) = rodio::OutputStream::try_from_device(&device).unwrap();
+
+    let file = File::open(path).unwrap();
+
+    let sink = stream_handle.play_once(file).unwrap();
+    sink.set_volume(0.2);
+    sink.play();
+
+    // loop {}
+}

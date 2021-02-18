@@ -34,12 +34,12 @@ const MediaControlVolume: React.FC = () => {
                 <Grid item>
                     <StyleMediaVolumeBar>
                         <Slider
-                            defaultValue={50}
+                            defaultValue={100}
                             aria-label={'MusicVolume'}
                             aria-labelledby="MusicVolume"
-                            step={0.1}
+                            step={0.001}
                             min={0}
-                            max={100}
+                            max={1}
                         />
                     </StyleMediaVolumeBar>
                 </Grid>

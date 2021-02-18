@@ -25,8 +25,8 @@ const MediaControlSeekBar: React.FC = () => {
                 <Grid item>
                     <Slider
                         defaultValue={0}
-                        aria-label={'MusicProgress'}
-                        aria-labelledby="MusicProgress"
+                        aria-label={'MusicProgressBar'}
+                        aria-labelledby="MusicProgressBar"
                         step={0.1}
                     />
                 </Grid>

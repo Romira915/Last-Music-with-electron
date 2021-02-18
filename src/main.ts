@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, dialog, Menu, session } from 'electron';
 import path from 'path';
 import * as isDev from 'electron-is-dev';
+import fs from 'fs';
 
 if (isDev) {
     require('electron-reload')(path.join(process.cwd(), 'build'), {
@@ -14,6 +15,9 @@ if (isDev) {
 }
 
 const native = require('../native');
+// const musicPlayer = new native.MusicPlayer(
+//     'C:/Users/Yudai/workspace/Project/Last-Music/01 Fight oh! MIRAI oh!.flac',
+// );
 
 // セキュアな Electron の構成
 // 参考: https://qiita.com/pochman/items/64b34e9827866664d436
