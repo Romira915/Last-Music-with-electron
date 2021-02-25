@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import {
     Paper,
@@ -24,19 +24,16 @@ import {
     ThemeProvider as MaterialThemeProvider,
 } from '@material-ui/core/styles';
 import { Provider, useDispatch, useSelector } from 'react-redux';
-import Store from './Store';
 import {} from './api/api';
-import Settings from './states/settings';
-import { State } from './states/state';
-import { changeSettingsAction } from './actions/settingsActions';
-import DarkTheme from './theme/DarkTheme';
-import LightTheme from './theme/LightTheme';
 import MediaControlPanel from './components/mediaControl/MediaControl';
 import MenuIcon from '@material-ui/icons/Menu';
 import LibraryList from './components/LibraryList';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { StyleApp, StyleCardMedia } from './styles/style';
 import LibraryPanel from './components/LibraryPanel';
+import store, { RootState, useAppDispatch } from './store';
+import { changeTheme, counter, Settings } from './slice/settingsSlice';
+import { darkTheme, lightTheme, ThemeEnum, themeFromEnum } from './theme/Theme';
 
 const container = document.getElementById('app');
 
@@ -46,16 +43,20 @@ const show = () => {
 };
 
 const App: React.FC = props => {
-    const { theme } = useSelector<State, Settings>(a => a.settings);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
+    const themeEnum = useSelector<RootState, Settings>(state => state.settings)
+        .theme;
+    const theme = useMemo(() => themeFromEnum(themeEnum), [themeEnum]);
 
     const onThemeChange = useCallback(() => {
         dispatch(
-            changeSettingsAction({
-                theme: theme === LightTheme ? DarkTheme : LightTheme,
-            }),
+            changeTheme(
+                themeEnum === ThemeEnum.light
+                    ? ThemeEnum.dark
+                    : ThemeEnum.light,
+            ),
         );
-    }, [theme]);
+    }, [themeEnum]);
 
     return (
         <MaterialThemeProvider theme={theme}>
@@ -72,7 +73,7 @@ const App: React.FC = props => {
 };
 
 ReactDOM.render(
-    <Provider store={Store}>
+    <Provider store={store}>
         <App>
             <MediaControlPanel />
 

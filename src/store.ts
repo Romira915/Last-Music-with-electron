@@ -1,18 +1,35 @@
 import { combineReducers, createStore } from 'redux';
-import { State } from './states/state';
-import userReducer from './reducers/UserReducer';
-import settingsReducer from './reducers/SettingsReducer';
+import {
+    configureStore,
+    createSlice,
+    getDefaultMiddleware,
+} from '@reduxjs/toolkit';
+import settingSlice from './slice/settingsSlice';
+import logger from 'redux-logger';
+import { useDispatch } from 'react-redux';
 
 // 複数の reducer を束ねる
-const combinedReducer = combineReducers<State>({
+const rootReducer = combineReducers({
     // --(a)
-    user: userReducer,
-    settings: settingsReducer,
+    settings: settingSlice.reducer,
     // reducer が増えたら足していく
 });
 
+export type RootState = ReturnType<typeof rootReducer>;
+
+const middlewareList = [
+    ...getDefaultMiddleware({ serializableCheck: true }),
+    logger,
+];
+
 // グローバルオブジェクトとして、store を作成する。
-export const store = createStore(combinedReducer); // --(b)
+const store = configureStore({
+    reducer: rootReducer,
+    middleware: middlewareList,
+});
+
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 // import store from './Store' とアクセスできるように default として定義する
 export default store;

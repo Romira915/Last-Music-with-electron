@@ -5,11 +5,13 @@ class MusicPlayer {
     private gainNode: GainNode;
     private destinationNode: MediaStreamAudioDestinationNode;
     private outputAudioElement: HTMLAudioElement;
-    private playList: string[];
-    private currentOutputAudioDevice: MediaDeviceInfo;
+    private playList: string[] | null;
+    private currentOutputAudioDevice: MediaDeviceInfo | null;
 
-    public constructor(playList?: string[]) {
+    public constructor(playList: string[] = []) {
         this.playList = playList;
+
+        this.currentOutputAudioDevice = null;
 
         this.audioContext = new AudioContext();
         this.audioElement = new Audio(this.playList[0]);
