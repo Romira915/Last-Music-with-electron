@@ -70,7 +70,7 @@ const AudioPlayerSeekBar: React.FC<Props> = props => {
                                 : props.currentTime
                         }
                         max={props.duration}
-                        step={0.01}
+                        step={0.0001}
                         onChange={handleSliderChange}
                         onChangeCommitted={handleSliderChangeCommitted}
                         aria-label={'MusicProgressBar'}

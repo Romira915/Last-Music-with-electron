@@ -14,10 +14,11 @@ interface Props {}
 
 const AudioPlayerPanel: React.FC<Props> = props => {
     const [isPlaying, setIsPlaying] = useState(false);
-    const [currentTime, setCurrentTime] = useState(0);
+    const [currentTime, setCurrentTime] = useState(0.05);
     const [duration, setDuration] = useState(0);
     const [title, setTitle] = useState('');
     const [pauseBySliderChange, setPauseBySliderChange] = useState(false);
+    const [volume, setVolume] = useState(0);
     const play = useCallback(() => {
         audioController.play();
     }, []);
@@ -27,7 +28,7 @@ const AudioPlayerPanel: React.FC<Props> = props => {
     const stop = useCallback(() => {
         audioController.stop();
     }, []);
-    const handleSliderChange = useCallback(
+    const handleSeekbarChange = useCallback(
         (value: number) => {
             if (isPlaying) {
                 pause();
@@ -36,7 +37,7 @@ const AudioPlayerPanel: React.FC<Props> = props => {
         },
         [isPlaying],
     );
-    const handleSliderChangeCommitted = useCallback(
+    const handleSeekbarChangeCommitted = useCallback(
         (value: number) => {
             audioController.currentTime = value;
             setCurrentTime(value);
@@ -47,6 +48,10 @@ const AudioPlayerPanel: React.FC<Props> = props => {
         },
         [pauseBySliderChange],
     );
+    const handleVolumebarChange = useCallback((value: number) => {
+        audioController.volume = value;
+        setVolume(value);
+    }, []);
     audioController.onplay = useCallback(() => {
         setIsPlaying(true);
         setTitle(audioController.title);
@@ -64,7 +69,7 @@ const AudioPlayerPanel: React.FC<Props> = props => {
         setTitle(audioController.title);
     }, []);
 
-    audioController.volume = 0.08;
+    // audioController.volume = 0.08;
 
     return (
         <StyleAudioPlayerPanel elevation={8} square>
@@ -78,10 +83,13 @@ const AudioPlayerPanel: React.FC<Props> = props => {
                 currentTime={currentTime}
                 duration={duration}
                 title={title}
-                onSliderChange={handleSliderChange}
-                onSliderChangeCommitted={handleSliderChangeCommitted}
+                onSliderChange={handleSeekbarChange}
+                onSliderChangeCommitted={handleSeekbarChangeCommitted}
             />
-            <AudioPlayerVolume />
+            <AudioPlayerVolume
+                volumeValue={volume}
+                onSliderChange={handleVolumebarChange}
+            />
             <AudioPlayerPlayOption />
         </StyleAudioPlayerPanel>
     );

@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, useState } from 'react';
 import {
     Box,
     Container,
@@ -15,7 +15,25 @@ import {
     StyleAudioVolumeBar,
 } from '../../styles/style';
 
-const AudioPlayerVolume: React.FC = () => {
+interface Props {
+    volumeValue: number;
+    onSliderChange: (value: number) => void;
+}
+
+const AudioPlayerVolume: React.FC<Props> = props => {
+    const [isChanging, setIsChanging] = useState(false);
+    const [sliderOnChangingValue, setSliderOnChangingValue] = useState(0);
+    const handleSliderChange = useCallback(
+        (event: React.ChangeEvent<{}>, value: number | number[]) => {
+            if (typeof value === 'number') {
+                setIsChanging(true);
+                props.onSliderChange(value);
+                setSliderOnChangingValue(value);
+            }
+        },
+        [props.onSliderChange],
+    );
+
     return (
         <StyleAudioPlayerVolumeGroup>
             <Grid
@@ -34,12 +52,19 @@ const AudioPlayerVolume: React.FC = () => {
                 <Grid item>
                     <StyleAudioVolumeBar>
                         <Slider
-                            defaultValue={100}
+                            value={
+                                isChanging
+                                    ? sliderOnChangingValue
+                                    : props.volumeValue
+                            }
+                            defaultValue={1}
                             aria-label={'MusicVolume'}
                             aria-labelledby="MusicVolume"
-                            step={0.001}
+                            step={0.0001}
                             min={0}
                             max={1}
+                            onChange={handleSliderChange}
+                            onChangeCommitted={() => setIsChanging(false)}
                         />
                     </StyleAudioVolumeBar>
                 </Grid>
