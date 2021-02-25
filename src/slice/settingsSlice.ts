@@ -15,7 +15,7 @@ export interface Settings {
 }
 
 const initSettingsState: Settings = {
-    theme: ThemeEnum.dark,
+    theme: ThemeEnum.Dark,
     count: [],
 };
 

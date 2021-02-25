@@ -1,13 +1,13 @@
 import React, { useMemo, useCallback } from 'react';
 import { Grid, IconButton, Tooltip } from '@material-ui/core';
-import { StyleMediaControlPlayOptionGroup } from '../../styles/style';
+import { StyleAudioPlayerPlayOptionGroup } from '../../styles/style';
 import { Repeat, Shuffle } from '@material-ui/icons';
 import RepeatButton from './RepeatButton';
 import ShuffleButton from './ShuffleButton';
 
-const MediaControlPlayOption: React.FC = () => {
+const AudioPlayerPlayOption: React.FC = () => {
     return (
-        <StyleMediaControlPlayOptionGroup>
+        <StyleAudioPlayerPlayOptionGroup>
             <Grid container direction={'row'} alignItems={'center'}>
                 <Grid item>
                     <RepeatButton />
@@ -16,8 +16,8 @@ const MediaControlPlayOption: React.FC = () => {
                     <ShuffleButton />
                 </Grid>
             </Grid>
-        </StyleMediaControlPlayOptionGroup>
+        </StyleAudioPlayerPlayOptionGroup>
     );
 };
 
-export default MediaControlPlayOption;
+export default AudioPlayerPlayOption;

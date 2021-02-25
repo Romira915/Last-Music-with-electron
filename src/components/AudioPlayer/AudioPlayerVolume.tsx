@@ -11,13 +11,13 @@ import {
 import VolumeUpIcon from '@material-ui/icons/VolumeUp';
 import RepeatIcon from '@material-ui/icons/Repeat';
 import {
-    StyleMediaControlVolumeGroup,
-    StyleMediaVolumeBar,
+    StyleAudioPlayerVolumeGroup,
+    StyleAudioVolumeBar,
 } from '../../styles/style';
 
-const MediaControlVolume: React.FC = () => {
+const AudioPlayerVolume: React.FC = () => {
     return (
-        <StyleMediaControlVolumeGroup>
+        <StyleAudioPlayerVolumeGroup>
             <Grid
                 container
                 justify={'flex-start'}
@@ -32,7 +32,7 @@ const MediaControlVolume: React.FC = () => {
                     </Tooltip>
                 </Grid>
                 <Grid item>
-                    <StyleMediaVolumeBar>
+                    <StyleAudioVolumeBar>
                         <Slider
                             defaultValue={100}
                             aria-label={'MusicVolume'}
@@ -41,11 +41,11 @@ const MediaControlVolume: React.FC = () => {
                             min={0}
                             max={1}
                         />
-                    </StyleMediaVolumeBar>
+                    </StyleAudioVolumeBar>
                 </Grid>
             </Grid>
-        </StyleMediaControlVolumeGroup>
+        </StyleAudioPlayerVolumeGroup>
     );
 };
 
-export default MediaControlVolume;
+export default AudioPlayerVolume;

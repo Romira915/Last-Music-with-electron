@@ -3,35 +3,45 @@ import { Box, Card, CardMedia, Container, Grid } from '@material-ui/core';
 import PlayButton from './PlayButton';
 import SkipNextButton from './SkipNextButton';
 import SkipPreviousButton from './SkipPreviousButton';
-import { StyleMediaControlPrimaryButtonGroup } from '../../styles/style';
+import { StyleAudioPlayerPrimaryButtonGroup } from '../../styles/style';
 import {} from '../../api/apiInterface';
 import { ContextReplacementPlugin } from 'webpack';
 import StopButton from './StopButton';
+import PauseButton from './PauseButton';
 
 interface Props {
     onPlayClick?: () => void;
     onStopClick?: () => void;
+    onPauseClick?: () => void;
+    onSkipPreviousClick?: () => void;
+    onSkipNextClick?: () => void;
+
+    isPlaying: boolean;
 }
 
-const MediaControlPrimaryButtonGroup: React.FC<Props> = props => {
+const AudioPlayerPrimaryButtonGroup: React.FC<Props> = props => {
     return (
-        <StyleMediaControlPrimaryButtonGroup>
+        <StyleAudioPlayerPrimaryButtonGroup>
             <Grid container direction={'row'} alignItems={'center'}>
                 <Grid item>
-                    <PlayButton onClick={props.onPlayClick} />
+                    {props.isPlaying ? (
+                        <PauseButton onClick={props.onPauseClick} />
+                    ) : (
+                        <PlayButton onClick={props.onPlayClick} />
+                    )}
                 </Grid>
                 <Grid item>
                     <StopButton onClick={props.onStopClick} />
                 </Grid>
                 <Grid item>
-                    <SkipPreviousButton />
+                    <SkipPreviousButton onClick={props.onSkipPreviousClick} />
                 </Grid>
                 <Grid item>
-                    <SkipNextButton />
+                    <SkipNextButton onClick={props.onSkipNextClick} />
                 </Grid>
             </Grid>
-        </StyleMediaControlPrimaryButtonGroup>
+        </StyleAudioPlayerPrimaryButtonGroup>
     );
 };
 
-export default MediaControlPrimaryButtonGroup;
+export default AudioPlayerPrimaryButtonGroup;

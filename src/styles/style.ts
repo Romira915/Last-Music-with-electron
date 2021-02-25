@@ -23,13 +23,13 @@ export const StyleApp = styled.div`
     `}
 `;
 
-export const StyleMediaVolumeBar = styled.div`
+export const StyleAudioVolumeBar = styled.div`
     ${(props: { theme: Theme }) => css`
         min-width: 4.5em;
     `}
 `;
 
-export const StyleMediaControlPanel = styled(Paper)`
+export const StyleAudioPlayerPanel = styled(Paper)`
     ${(props: { theme: Theme }) => css`
         display: flex;
         align-items: center;
@@ -37,26 +37,26 @@ export const StyleMediaControlPanel = styled(Paper)`
     `}
 `;
 
-export const StyleMediaControlPrimaryButtonGroup = styled.div`
+export const StyleAudioPlayerPrimaryButtonGroup = styled.div`
     ${(props: { theme: Theme }) => css`
         min-width: 183px;
     `}
 `;
 
-export const StyleMediaControlSeekBarGroup = styled.div`
+export const StyleAudioPlayerSeekBarGroup = styled.div`
     ${(props: { theme: Theme }) => css`
         flex: 1;
         min-width: 140px;
     `}
 `;
 
-export const StyleMediaControlVolumeGroup = styled.div`
+export const StyleAudioPlayerVolumeGroup = styled.div`
     ${(props: { theme: Theme }) => css`
         min-width: 107px;
     `}
 `;
 
-export const StyleMediaControlPlayOptionGroup = styled.div`
+export const StyleAudioPlayerPlayOptionGroup = styled.div`
     ${(props: { theme: Theme }) => css`
         min-width: 84px;
     `}

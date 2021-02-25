@@ -25,7 +25,7 @@ import {
 } from '@material-ui/core/styles';
 import { Provider, useDispatch, useSelector } from 'react-redux';
 import {} from './api/api';
-import MediaControlPanel from './components/mediaControl/MediaControl';
+import AudioPlayerPanel from './components/AudioPlayer/AudioPlayer';
 import MenuIcon from '@material-ui/icons/Menu';
 import LibraryList from './components/LibraryList';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
@@ -51,9 +51,9 @@ const App: React.FC = props => {
     const onThemeChange = useCallback(() => {
         dispatch(
             changeTheme(
-                themeEnum === ThemeEnum.light
-                    ? ThemeEnum.dark
-                    : ThemeEnum.light,
+                themeEnum === ThemeEnum.Light
+                    ? ThemeEnum.Dark
+                    : ThemeEnum.Light,
             ),
         );
     }, [themeEnum]);
@@ -75,7 +75,7 @@ const App: React.FC = props => {
 ReactDOM.render(
     <Provider store={store}>
         <App>
-            <MediaControlPanel />
+            <AudioPlayerPanel />
 
             <LibraryPanel />
         </App>

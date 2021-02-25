@@ -1,17 +1,17 @@
 import { createMuiTheme } from '@material-ui/core';
 
 export const ThemeEnum = {
-    light: 'light',
-    dark: 'dark',
+    Light: 'Light',
+    Dark: 'Dark',
 };
 
 export type ThemeEnum = typeof ThemeEnum[keyof typeof ThemeEnum];
 
 export const themeFromEnum = (union: ThemeEnum) => {
     switch (union) {
-        case ThemeEnum.light:
+        case ThemeEnum.Light:
             return lightTheme;
-        case ThemeEnum.dark:
+        case ThemeEnum.Dark:
             return darkTheme;
     }
 };
