@@ -23,9 +23,11 @@ class AudioController {
     private currentOutputAudioDevice: MediaDeviceInfo | null;
     private audioStatus: AudioStatus;
     private handleAudioOnstop: () => void;
+    private currentAudioIndex: number;
 
     public constructor(playList: string[] = []) {
         this.playList = playList;
+        this.currentAudioIndex = this.playList.length === 0 ? -1 : 0;
 
         this.audioStatus = AudioStatus.Unknown;
         this.currentOutputAudioDevice = null;
@@ -44,13 +46,25 @@ class AudioController {
         this.gainNode.connect(this.destinationNode);
         this.outputAudioElement.srcObject = this.destinationNode.stream;
 
-        this.audioElement.oncanplay = () =>
-            (this.audioStatus = AudioStatus.Ready);
-        this.audioElement.onwaiting = () =>
-            (this.audioStatus = AudioStatus.Waiting);
-        this.audioElement.onstalled = () =>
-            (this.audioStatus = AudioStatus.Stalled);
-        this.audioElement.onended;
+        this.audioElement.oncanplay = () => {
+            console.log('oncanplay');
+            this.audioStatus = AudioStatus.Ready;
+        };
+        this.audioElement.onwaiting = () => {
+            console.log('onwaiting');
+            this.audioStatus = AudioStatus.Waiting;
+        };
+        this.audioElement.onstalled = () => {
+            console.log('onstalled');
+            this.audioStatus = AudioStatus.Stalled;
+        };
+        this.audioElement.onended = (ev: Event) => {
+            console.log('onended');
+            console.log(this.status);
+            this.currentAudioIndex += 1;
+            this.audioElement.src = this.playList[this.currentAudioIndex];
+            this.audioElement.autoplay = true;
+        };
     }
 
     public play() {
@@ -118,13 +132,16 @@ class AudioController {
 
     public set onplay(callback: (ev: Event) => void) {
         this.audioElement.onplay = (ev: Event) => {
+            console.log('onplay');
             callback(ev);
             this.audioStatus = AudioStatus.Playing;
+            this.audioElement.autoplay = false;
         };
     }
 
     public set onpause(callback: (ev: Event) => void) {
         this.audioElement.onpause = (ev: Event) => {
+            console.log('onpause');
             callback(ev);
             this.audioStatus = AudioStatus.Paused;
         };
@@ -132,6 +149,7 @@ class AudioController {
 
     public set onstop(callback: () => void) {
         this.handleAudioOnstop = () => {
+            console.log('onstop');
             callback();
             this.audioStatus = AudioStatus.Stopped;
         };
@@ -142,6 +160,7 @@ class AudioController {
     }
 
     public set onloadedmetadata(callback: (ev: Event) => void) {
+        console.log('onloadedmetadata');
         this.audioElement.onloadedmetadata = callback;
     }
 }
