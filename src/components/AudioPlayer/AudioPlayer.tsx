@@ -6,9 +6,12 @@ import AudioPlayerPlayOption from './AudioPlayerPlayOption';
 import { StyleAudioPlayerPanel } from '../../styles/style';
 import AudioController, { AudioStatus } from './audioController';
 
-const media =
-    'C:\\Users\\Yudai\\workspace\\Project\\Last-Music\\01 Fight oh! MIRAI oh!.flac';
-const audioController = new AudioController([media]);
+const media = [
+    '../01 Fight oh! MIRAI oh!.flac',
+    '../01 Aile To Yell.mp3',
+    '../02 シャンランラン.mp4',
+];
+const audioController = new AudioController(media);
 
 interface Props {}
 
@@ -20,19 +23,19 @@ const AudioPlayerPanel: React.FC<Props> = props => {
     const [pauseBySliderChange, setPauseBySliderChange] = useState(false);
     const [volume, setVolume] = useState(0.05);
     const [isMuted, setIsMuted] = useState(false);
-    const play = useCallback(() => {
+    const handlePlayClick = useCallback(() => {
         audioController.play();
     }, []);
-    const pause = useCallback(() => {
+    const handlePauseClick = useCallback(() => {
         audioController.pause();
     }, []);
-    const stop = useCallback(() => {
+    const handleStopClick = useCallback(() => {
         audioController.stop();
     }, []);
     const handleSeekbarChange = useCallback(
         (value: number) => {
             if (isPlaying) {
-                pause();
+                handlePauseClick();
                 setPauseBySliderChange(true);
             }
         },
@@ -43,7 +46,7 @@ const AudioPlayerPanel: React.FC<Props> = props => {
             audioController.currentTime = value;
             setCurrentTime(value);
             if (pauseBySliderChange) {
-                play();
+                handlePlayClick();
                 setPauseBySliderChange(false);
             }
         },
@@ -79,9 +82,9 @@ const AudioPlayerPanel: React.FC<Props> = props => {
     return (
         <StyleAudioPlayerPanel elevation={8} square>
             <AudioPlayerPrimaryButtonGroup
-                onPlayClick={play}
-                onPauseClick={pause}
-                onStopClick={stop}
+                onPlayClick={handlePlayClick}
+                onPauseClick={handlePauseClick}
+                onStopClick={handleStopClick}
                 isPlaying={isPlaying}
             />
             <AudioPlayerSeekBar

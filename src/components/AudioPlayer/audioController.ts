@@ -33,7 +33,6 @@ class AudioController {
 
         this.audioContext = new AudioContext();
         this.audioElement = new Audio(this.playList[0]);
-        this.audioElement.controls = true;
         this.sourceNode = this.audioContext.createMediaElementSource(
             this.audioElement,
         );
@@ -51,6 +50,7 @@ class AudioController {
             (this.audioStatus = AudioStatus.Waiting);
         this.audioElement.onstalled = () =>
             (this.audioStatus = AudioStatus.Stalled);
+        this.audioElement.onended;
     }
 
     public play() {
