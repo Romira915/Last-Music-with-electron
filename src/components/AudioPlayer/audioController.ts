@@ -93,6 +93,14 @@ class AudioController {
         return this.audioElement.currentTime;
     }
 
+    public set muted(value: boolean) {
+        this.audioElement.muted = value;
+    }
+
+    public get muted() {
+        return this.audioElement.muted;
+    }
+
     public get status() {
         return this.audioStatus;
     }

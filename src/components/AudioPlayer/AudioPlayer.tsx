@@ -14,11 +14,12 @@ interface Props {}
 
 const AudioPlayerPanel: React.FC<Props> = props => {
     const [isPlaying, setIsPlaying] = useState(false);
-    const [currentTime, setCurrentTime] = useState(0.05);
+    const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [title, setTitle] = useState('');
     const [pauseBySliderChange, setPauseBySliderChange] = useState(false);
-    const [volume, setVolume] = useState(0);
+    const [volume, setVolume] = useState(0.05);
+    const [isMuted, setIsMuted] = useState(false);
     const play = useCallback(() => {
         audioController.play();
     }, []);
@@ -52,6 +53,10 @@ const AudioPlayerPanel: React.FC<Props> = props => {
         audioController.volume = value;
         setVolume(value);
     }, []);
+    const handleMuteClick = useCallback(() => {
+        audioController.muted = !audioController.muted;
+        setIsMuted(audioController.muted);
+    }, []);
     audioController.onplay = useCallback(() => {
         setIsPlaying(true);
         setTitle(audioController.title);
@@ -69,7 +74,7 @@ const AudioPlayerPanel: React.FC<Props> = props => {
         setTitle(audioController.title);
     }, []);
 
-    // audioController.volume = 0.08;
+    audioController.volume = useMemo(() => volume, [volume]);
 
     return (
         <StyleAudioPlayerPanel elevation={8} square>
@@ -87,6 +92,8 @@ const AudioPlayerPanel: React.FC<Props> = props => {
                 onSliderChangeCommitted={handleSeekbarChangeCommitted}
             />
             <AudioPlayerVolume
+                onMuteClick={handleMuteClick}
+                isMuted={isMuted}
                 volumeValue={volume}
                 onSliderChange={handleVolumebarChange}
             />
