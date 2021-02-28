@@ -5,11 +5,11 @@ import { Repeat, Shuffle } from '@material-ui/icons';
 import RepeatButton from './RepeatButton';
 import ShuffleButton from './ShuffleButton';
 import { RepeatMode } from './audioController';
+import { useSelector } from 'react-redux';
+import { RootState, useAppDispatch } from '../../store';
+import { AudioPlayerSettings } from '../../slice/settings/audioPlayerSettingsSlice';
 
-interface Props {
-    onRepeatClick?: () => void;
-    onShuffleClick?: () => void;
-}
+interface Props {}
 
 const AudioPlayerPlayOption: React.FC<Props> = props => {
     return (
@@ -17,13 +17,11 @@ const AudioPlayerPlayOption: React.FC<Props> = props => {
             <Grid container direction={'row'} alignItems={'center'}>
                 <Grid item>
                     <RepeatButton
-                        // TODO 後でプレイヤーと同期
-                        repeatMode={RepeatMode.RepeatOff}
-                        onClick={props.onRepeatClick}
+                    // doneTODO 後でプレイヤーと同期
                     />
                 </Grid>
                 <Grid item>
-                    <ShuffleButton onClick={props.onShuffleClick} />
+                    <ShuffleButton />
                 </Grid>
             </Grid>
         </StyleAudioPlayerPlayOptionGroup>

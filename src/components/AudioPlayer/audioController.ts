@@ -132,6 +132,7 @@ class AudioController {
         return this.toPosition('last');
     }
 
+    // TODO タイトルの取得方法を実装する．現在取得できていない．
     public get title() {
         return this.audioElement.title;
     }
