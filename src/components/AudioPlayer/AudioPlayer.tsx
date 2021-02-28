@@ -13,6 +13,9 @@ import {
     setVolume,
 } from '../../slice/settings/audioPlayerSettingsSlice';
 
+// If the threshold is exceeded, make the currentTime of the current song the first.
+const THRESHOLD_OF_TO_PREVIOUS: number = 0.02;
+
 const media = [
     '../01 Fight oh! MIRAI oh!.flac',
     '../01 Aile To Yell.mp3',
@@ -41,6 +44,24 @@ const AudioPlayerPanel: React.FC<Props> = props => {
     const handleStopClick = useCallback(() => {
         audioController.stop();
     }, []);
+    const handleSkipPreviousClick = useCallback(() => {
+        if (currentTime / duration > THRESHOLD_OF_TO_PREVIOUS) {
+            handleStopClick();
+            if (isPlaying) {
+                handlePlayClick();
+            }
+        } else if (!audioController.toPrevious()) {
+            audioController.toLast();
+        }
+
+        audioController.autoplay = isPlaying;
+    }, [currentTime, duration, isPlaying]);
+    const handleSkipNextClick = useCallback(() => {
+        if (!audioController.toNext()) {
+            audioController.toFirst();
+        }
+        audioController.autoplay = isPlaying;
+    }, [isPlaying]);
     const handleSeekbarChange = useCallback(
         (value: number) => {
             if (isPlaying) {
@@ -85,6 +106,8 @@ const AudioPlayerPanel: React.FC<Props> = props => {
                 onPlayClick={handlePlayClick}
                 onPauseClick={handlePauseClick}
                 onStopClick={handleStopClick}
+                onSkipPreviousClick={handleSkipPreviousClick}
+                onSkipNextClick={handleSkipNextClick}
                 isPlaying={isPlaying}
             />
             <AudioPlayerSeekBar

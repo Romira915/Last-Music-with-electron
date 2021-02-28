@@ -169,6 +169,10 @@ class AudioController {
         return this.audioStatus;
     }
 
+    public set autoplay(value: boolean) {
+        this.audioElement.autoplay = value;
+    }
+
     public set settings(value: AudioPlayerSettings) {
         this.volume = value.volume;
         this.muted = value.isMuted;

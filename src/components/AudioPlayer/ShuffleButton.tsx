@@ -18,9 +18,9 @@ const ShuffleButton: React.FC<Props> = props => {
     );
 
     const [title, color, handleShuffleClick] = useMemo(() => {
-        let title: string;
+        let title: string = '';
         let color: 'action' | 'disabled' = 'action';
-        let handle: () => void;
+        let handle: () => void = () => {};
         switch (shuffleMode) {
             case ShuffleMode.ShuffleOff:
                 title = 'Shuffle on';

@@ -18,9 +18,9 @@ const RepeatButton: React.FC<Props> = props => {
     );
 
     const [title, color, handleRepeatClick] = useMemo(() => {
-        let title: string;
+        let title: string = '';
         let color: 'action' | 'disabled' = 'action';
-        let handle: () => void;
+        let handle: () => void = () => {};
         switch (repeatMode) {
             case RepeatMode.RepeatOff:
                 title = 'Repeat all';
