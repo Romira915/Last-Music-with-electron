@@ -51,9 +51,7 @@
     "redux-persist": "^6.0.0",
     "reset-css": "^5.0.1",
     "style-loader": "^2.0.0",
-    "styled-components": "^5.2.1",
-    "typescript-fsa": "^3.0.0",
-    "typescript-fsa-reducers": "^1.2.2"
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "@types/moment": "^2.13.0",
