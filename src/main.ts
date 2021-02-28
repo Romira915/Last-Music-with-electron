@@ -3,6 +3,7 @@ import path from 'path';
 import * as isDev from 'electron-is-dev';
 import fs from 'fs';
 
+// TODO Priority:Low デバックビルドとリリースビルドをソースコードの変更なく実行できるようにする．現段階では不十分．
 if (isDev) {
     require('electron-reload')(path.join(process.cwd(), 'build'), {
         electron: path.join(
