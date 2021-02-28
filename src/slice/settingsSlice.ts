@@ -11,12 +11,10 @@ import { ThemeEnum } from '../theme/Theme';
 
 export interface Settings {
     theme: ThemeEnum;
-    count: string[];
 }
 
 const initSettingsState: Settings = {
     theme: ThemeEnum.Dark,
-    count: [],
 };
 
 const settingSlice = createSlice({
@@ -26,12 +24,9 @@ const settingSlice = createSlice({
         changeTheme: (state, action: PayloadAction<ThemeEnum>) => {
             state.theme = action.payload;
         },
-        counter: (state, action: PayloadAction<undefined>) => {
-            state.count.push('counter');
-        },
     },
 });
 
-export const { changeTheme, counter } = settingSlice.actions;
+export const { changeTheme } = settingSlice.actions;
 
 export default settingSlice;

@@ -31,9 +31,10 @@ import LibraryList from './components/LibraryList';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { StyleApp, StyleCardMedia } from './styles/style';
 import LibraryPanel from './components/LibraryPanel';
-import store, { RootState, useAppDispatch } from './store';
-import { changeTheme, counter, Settings } from './slice/settingsSlice';
+import store, { persistor, RootState, useAppDispatch } from './store';
+import { changeTheme, Settings } from './slice/settingsSlice';
 import { darkTheme, lightTheme, ThemeEnum, themeFromEnum } from './theme/Theme';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const container = document.getElementById('app');
 
@@ -74,11 +75,13 @@ const App: React.FC = props => {
 
 ReactDOM.render(
     <Provider store={store}>
-        <App>
-            <AudioPlayerPanel />
+        <PersistGate loading={null} persistor={persistor}>
+            <App>
+                <AudioPlayerPanel />
 
-            <LibraryPanel />
-        </App>
+                <LibraryPanel />
+            </App>
+        </PersistGate>
     </Provider>,
     container,
 );

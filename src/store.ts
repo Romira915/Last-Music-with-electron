@@ -7,6 +7,23 @@ import {
 import settingSlice from './slice/settingsSlice';
 import logger from 'redux-logger';
 import { useDispatch } from 'react-redux';
+import storage from 'redux-persist/lib/storage';
+import {
+    FLUSH,
+    PAUSE,
+    PERSIST,
+    persistReducer,
+    persistStore,
+    PURGE,
+    REGISTER,
+    REHYDRATE,
+} from 'redux-persist';
+
+const persistConfig = {
+    key: 'persist',
+    version: 1,
+    storage,
+};
 
 // 複数の reducer を束ねる
 const rootReducer = combineReducers({
@@ -15,18 +32,26 @@ const rootReducer = combineReducers({
     // reducer が増えたら足していく
 });
 
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export type RootState = ReturnType<typeof rootReducer>;
 
 const middlewareList = [
-    ...getDefaultMiddleware({ serializableCheck: true }),
+    ...getDefaultMiddleware({
+        serializableCheck: {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+    }),
     logger,
 ];
 
 // グローバルオブジェクトとして、store を作成する。
 const store = configureStore({
-    reducer: rootReducer,
+    reducer: persistedReducer,
     middleware: middlewareList,
 });
+
+export let persistor = persistStore(store);
 
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();

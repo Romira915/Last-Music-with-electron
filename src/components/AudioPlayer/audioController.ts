@@ -213,7 +213,7 @@ class AudioController {
     }
 
     private toPosition(skipPosition: 'previous' | 'next' | 'first' | 'last') {
-        let skipPositionIndex;
+        let skipPositionIndex: number;
         switch (skipPosition) {
             case 'previous':
                 skipPositionIndex = this.currentAudioIndex - 1;
