@@ -20,7 +20,7 @@ const RepeatButton: React.FC<Props> = props => {
             case RepeatMode.RepeatAll:
                 title = 'Repeat single';
                 break;
-            case RepeatMode.RepeatSingle:
+            case RepeatMode.RepeatOne:
                 title = 'Repeat off';
                 break;
         }
@@ -30,7 +30,7 @@ const RepeatButton: React.FC<Props> = props => {
     return (
         <Tooltip title={title}>
             <IconButton edge={'end'} onClick={props.onClick}>
-                {props.repeatMode === RepeatMode.RepeatSingle ? (
+                {props.repeatMode === RepeatMode.RepeatOne ? (
                     <RepeatOne color={color} />
                 ) : (
                     <Repeat color={color} />
