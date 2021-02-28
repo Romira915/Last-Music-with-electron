@@ -53,8 +53,10 @@ const AudioPlayerVolume: React.FC<Props> = props => {
     const sliderValue = useMemo(() => {
         let value = 1;
         if (isChanging) {
+            // Give priority to user operations.
             value = sliderOnChangingValue;
         } else if (props.isMuted) {
+            // Set to 0 for display only when muted. (Do not change the volume of audio.)
             value = 0;
         } else {
             value = props.volumeValue;

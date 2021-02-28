@@ -12,6 +12,21 @@ export const AudioStatus = {
 
 export type AudioStatus = typeof AudioStatus[keyof typeof AudioStatus];
 
+export const RepeatMode = {
+    RepeatOff: 'RepeatOff',
+    RepeatOne: 'RepeatOne',
+    RepeatAll: 'RepeatAll',
+};
+
+export type RepeatMode = typeof RepeatMode[keyof typeof RepeatMode];
+
+export const ShuffleMode = {
+    ShuffleOff: 'ShuffleOff',
+    ShuffleOn: 'ShuffleOn',
+};
+
+export type ShuffleMode = typeof ShuffleMode[keyof typeof ShuffleMode];
+
 class AudioController {
     private audioContext: AudioContext;
     private audioElement: HTMLAudioElement;
@@ -19,22 +34,26 @@ class AudioController {
     private gainNode: GainNode;
     private destinationNode: MediaStreamAudioDestinationNode;
     private outputAudioElement: HTMLAudioElement;
-    private playList: string[] | null;
+    private playingList: string[] | null;
     private currentOutputAudioDevice: MediaDeviceInfo | null;
     private audioStatus: AudioStatus;
     private handleAudioOnstop: () => void;
     private currentAudioIndex: number;
+    public repeatMode: RepeatMode;
+    public shuffleMode: ShuffleMode;
 
-    public constructor(playList: string[] = []) {
-        this.playList = playList;
-        this.currentAudioIndex = this.playList.length === 0 ? -1 : 0;
+    public constructor(playingList: string[] = []) {
+        this.playingList = playingList;
+        this.currentAudioIndex = this.playingList.length === 0 ? -1 : 0;
 
         this.audioStatus = AudioStatus.Unknown;
         this.currentOutputAudioDevice = null;
         this.handleAudioOnstop = () => {};
+        this.repeatMode = RepeatMode.RepeatOff;
+        this.shuffleMode = ShuffleMode.ShuffleOff;
 
         this.audioContext = new AudioContext();
-        this.audioElement = new Audio(this.playList[0]);
+        this.audioElement = new Audio(this.playingList[0]);
         this.sourceNode = this.audioContext.createMediaElementSource(
             this.audioElement,
         );
@@ -60,9 +79,22 @@ class AudioController {
         };
         this.audioElement.onended = (ev: Event) => {
             console.log('onended');
-            console.log(this.status);
-            this.currentAudioIndex += 1;
-            this.audioElement.src = this.playList[this.currentAudioIndex];
+            // TODO エンド処理の実装
+            if (this.repeatMode === RepeatMode.RepeatOne) {
+                this.play();
+            } else if (this.shuffleMode === ShuffleMode.ShuffleOn) {
+                this.audioElement.src = this.playingList[
+                    Math.floor(Math.random() * this.playingList.length)
+                ];
+            } else if (
+                this.repeatMode === RepeatMode.RepeatAll &&
+                this.playingList.length - 1 === this.currentAudioIndex
+            ) {
+                this.toFirst();
+            } else {
+                this.toNext();
+            }
+
             this.audioElement.autoplay = true;
         };
     }
@@ -81,6 +113,22 @@ class AudioController {
         this.pause();
         this.audioElement.currentTime = 0;
         this.handleAudioOnstop();
+    }
+
+    public toPrevious() {
+        return this.toPosition('previous');
+    }
+
+    public toNext() {
+        return this.toPosition('next');
+    }
+
+    public toFirst() {
+        return this.toPosition('first');
+    }
+
+    public toLast() {
+        return this.toPosition('last');
     }
 
     public get title() {
@@ -162,6 +210,32 @@ class AudioController {
     public set onloadedmetadata(callback: (ev: Event) => void) {
         console.log('onloadedmetadata');
         this.audioElement.onloadedmetadata = callback;
+    }
+
+    private toPosition(skipPosition: 'previous' | 'next' | 'first' | 'last') {
+        let skipPositionIndex;
+        switch (skipPosition) {
+            case 'previous':
+                skipPositionIndex = this.currentAudioIndex - 1;
+                break;
+            case 'next':
+                skipPositionIndex = this.currentAudioIndex + 1;
+                break;
+            case 'first':
+                skipPositionIndex = 0;
+                break;
+            case 'last':
+                skipPositionIndex = this.playingList.length - 1;
+                break;
+        }
+
+        if (this.playingList[skipPositionIndex] != undefined) {
+            this.currentAudioIndex = skipPositionIndex;
+            this.audioElement.src = this.playingList[this.currentAudioIndex];
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

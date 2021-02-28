@@ -62,6 +62,12 @@ export const StyleAudioPlayerPlayOptionGroup = styled.div`
     `}
 `;
 
+export const StyleTransparency = styled.div`
+    ${(props: { theme: Theme }) => css`
+        opacity: 0.25;
+    `}
+`;
+
 export const StyleLibraryListGroup = styled.div`
     ${(props: { theme: Theme }) => css`
         width: ${librarylistWidth};
