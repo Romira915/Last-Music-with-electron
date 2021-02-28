@@ -5,6 +5,13 @@ import AudioPlayerVolume from './AudioPlayerVolume';
 import AudioPlayerPlayOption from './AudioPlayerPlayOption';
 import { StyleAudioPlayerPanel } from '../../styles/style';
 import AudioController, { AudioStatus } from './audioController';
+import { RootState, useAppDispatch } from '../../store';
+import { useSelector } from 'react-redux';
+import {
+    AudioPlayerSettings,
+    setMuted,
+    setVolume,
+} from '../../slice/settings/audioPlayerSettingsSlice';
 
 const media = [
     '../01 Fight oh! MIRAI oh!.flac',
@@ -16,13 +23,15 @@ const audioController = new AudioController(media);
 interface Props {}
 
 const AudioPlayerPanel: React.FC<Props> = props => {
+    const dispatch = useAppDispatch();
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [title, setTitle] = useState('');
-    const [pauseBySliderChange, setPauseBySliderChange] = useState(false);
-    const [volume, setVolume] = useState(0.05);
-    const [isMuted, setIsMuted] = useState(false);
+    const [pauseBySeekberChange, setPauseBySeekberChange] = useState(false);
+    audioController.settings = useSelector<RootState, AudioPlayerSettings>(
+        state => state.settings.audioPlayerSettings,
+    );
     const handlePlayClick = useCallback(() => {
         audioController.play();
     }, []);
@@ -36,7 +45,7 @@ const AudioPlayerPanel: React.FC<Props> = props => {
         (value: number) => {
             if (isPlaying) {
                 handlePauseClick();
-                setPauseBySliderChange(true);
+                setPauseBySeekberChange(true);
             }
         },
         [isPlaying],
@@ -45,21 +54,14 @@ const AudioPlayerPanel: React.FC<Props> = props => {
         (value: number) => {
             audioController.currentTime = value;
             setCurrentTime(value);
-            if (pauseBySliderChange) {
+            if (pauseBySeekberChange) {
                 handlePlayClick();
-                setPauseBySliderChange(false);
+                setPauseBySeekberChange(false);
             }
         },
-        [pauseBySliderChange],
+        [pauseBySeekberChange],
     );
-    const handleVolumebarChange = useCallback((value: number) => {
-        audioController.volume = value;
-        setVolume(value);
-    }, []);
-    const handleMuteClick = useCallback(() => {
-        audioController.muted = !audioController.muted;
-        setIsMuted(audioController.muted);
-    }, []);
+
     audioController.onplay = useCallback(() => {
         setIsPlaying(true);
         setTitle(audioController.title);
@@ -77,8 +79,6 @@ const AudioPlayerPanel: React.FC<Props> = props => {
         setTitle(audioController.title);
     }, []);
 
-    audioController.volume = useMemo(() => volume, [volume]);
-
     return (
         <StyleAudioPlayerPanel elevation={8} square>
             <AudioPlayerPrimaryButtonGroup
@@ -94,12 +94,7 @@ const AudioPlayerPanel: React.FC<Props> = props => {
                 onSliderChange={handleSeekbarChange}
                 onSliderChangeCommitted={handleSeekbarChangeCommitted}
             />
-            <AudioPlayerVolume
-                onMuteClick={handleMuteClick}
-                isMuted={isMuted}
-                volumeValue={volume}
-                onSliderChange={handleVolumebarChange}
-            />
+            <AudioPlayerVolume />
             <AudioPlayerPlayOption />
         </StyleAudioPlayerPanel>
     );

@@ -4,7 +4,7 @@ import {
     createSlice,
     getDefaultMiddleware,
 } from '@reduxjs/toolkit';
-import settingSlice from './slice/settingsSlice';
+import generalSettingSlice from './slice/settings/generalSettingsSlice';
 import logger from 'redux-logger';
 import { useDispatch } from 'react-redux';
 import storage from 'redux-persist/lib/storage';
@@ -18,17 +18,20 @@ import {
     REGISTER,
     REHYDRATE,
 } from 'redux-persist';
+import { settingsReducers } from './slice/settings';
+import audioPlayerSettingsSlice from './slice/settings/audioPlayerSettingsSlice';
 
 const persistConfig = {
     key: 'persist',
-    version: 1,
+    version: 0.1,
     storage,
+    blacklist: [],
 };
 
 // 複数の reducer を束ねる
 const rootReducer = combineReducers({
     // --(a)
-    settings: settingSlice.reducer,
+    settings: settingsReducers,
     // reducer が増えたら足していく
 });
 

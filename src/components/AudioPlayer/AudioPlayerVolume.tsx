@@ -13,56 +13,73 @@ import {
     StyleAudioVolumeBar,
 } from '../../styles/style';
 import MuteButton from './MuteButton';
+import { RootState, useAppDispatch } from '../../store';
+import { useSelector } from 'react-redux';
+import {
+    AudioPlayerSettings,
+    setMuted,
+    setVolume,
+} from '../../slice/settings/audioPlayerSettingsSlice';
 
-interface Props {
-    onMuteClick?: () => void;
-    isMuted: boolean;
-    volumeValue: number;
-    onSliderChange: (value: number) => void;
-}
+interface Props {}
 
 const AudioPlayerVolume: React.FC<Props> = props => {
+    const dispatch = useAppDispatch();
+    const { volume, isMuted } = useSelector<RootState, AudioPlayerSettings>(
+        state => state.settings.audioPlayerSettings,
+    );
     const [isChanging, setIsChanging] = useState(false);
     const [sliderOnChangingValue, setSliderOnChangingValue] = useState(0);
+    const handleMuteClick = useCallback(() => {
+        dispatch(setMuted(!isMuted));
+    }, [isMuted]);
     const handleSliderChange = useCallback(
         (event: React.ChangeEvent<{}>, value: number | number[]) => {
             if (typeof value === 'number') {
                 setIsChanging(true);
-                props.onSliderChange(value);
+                dispatch(setVolume(value));
                 setSliderOnChangingValue(value);
-                if (props.isMuted) {
-                    props.onMuteClick();
+                if (isMuted) {
+                    handleMuteClick();
                 }
             }
         },
-        [props.isMuted, props.onSliderChange, props.onMuteClick],
+        [isMuted],
+    );
+    const handleSliderChangeCommitted = useCallback(
+        (event: React.ChangeEvent<{}>, value: number | number[]) => {
+            if (typeof value === 'number') {
+                setIsChanging(false);
+            }
+        },
+        [],
     );
 
     const volumeLevel: 0 | 1 | 2 = useMemo(() => {
         let value: 0 | 1 | 2 = 2;
-        if (props.volumeValue > 0.5) {
+        if (volume > 0.5) {
             value = 2;
-        } else if (props.volumeValue > 0) {
+        } else if (volume > 0) {
             value = 1;
         } else {
             value = 0;
         }
         return value;
-    }, [props.volumeValue]);
+    }, [volume]);
 
     const sliderValue = useMemo(() => {
         let value = 1;
         if (isChanging) {
             // Give priority to user operations.
             value = sliderOnChangingValue;
-        } else if (props.isMuted) {
+        } else if (isMuted) {
             // Set to 0 for display only when muted. (Do not change the volume of audio.)
             value = 0;
         } else {
-            value = props.volumeValue;
+            value = volume;
         }
         return value;
-    }, [isChanging, sliderOnChangingValue, props.isMuted, props.volumeValue]);
+    }, [isChanging, sliderOnChangingValue, isMuted, volume]);
 
     return (
         <StyleAudioPlayerVolumeGroup>
@@ -74,9 +91,9 @@ const AudioPlayerVolume: React.FC<Props> = props => {
                 direction={'row'}>
                 <Grid item>
                     <MuteButton
-                        isMuted={props.isMuted}
+                        isMuted={isMuted}
                         volumeLevel={volumeLevel}
-                        onClick={props.onMuteClick}
+                        onClick={handleMuteClick}
                     />
                 </Grid>
                 <Grid item>
@@ -90,7 +107,7 @@ const AudioPlayerVolume: React.FC<Props> = props => {
                             min={0}
                             max={1}
                             onChange={handleSliderChange}
-                            onChangeCommitted={() => setIsChanging(false)}
+                            onChangeCommitted={handleSliderChangeCommitted}
                         />
                     </StyleAudioVolumeBar>
                 </Grid>

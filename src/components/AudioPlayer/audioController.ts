@@ -1,4 +1,5 @@
 import { ThreeSixtyOutlined } from '@material-ui/icons';
+import { AudioPlayerSettings } from '../../slice/settings/audioPlayerSettingsSlice';
 
 export const AudioStatus = {
     Playing: 'Playing',
@@ -165,6 +166,13 @@ class AudioController {
 
     public get status() {
         return this.audioStatus;
+    }
+
+    public set settings(value: AudioPlayerSettings) {
+        this.volume = value.volume;
+        this.muted = value.isMuted;
+        this.repeatMode = value.repeatMode;
+        this.shuffleMode = value.shuffleMode;
     }
 
     public async getAudioDevices() {

@@ -32,7 +32,10 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import { StyleApp, StyleCardMedia } from './styles/style';
 import LibraryPanel from './components/LibraryPanel';
 import store, { persistor, RootState, useAppDispatch } from './store';
-import { changeTheme, Settings } from './slice/settingsSlice';
+import {
+    changeTheme,
+    GeneralSettings,
+} from './slice/settings/generalSettingsSlice';
 import { darkTheme, lightTheme, ThemeEnum, themeFromEnum } from './theme/Theme';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -45,8 +48,9 @@ const show = () => {
 
 const App: React.FC = props => {
     const dispatch = useAppDispatch();
-    const themeEnum = useSelector<RootState, Settings>(state => state.settings)
-        .theme;
+    const themeEnum = useSelector<RootState, GeneralSettings>(
+        state => state.settings.generalSettings,
+    ).theme;
     const theme = useMemo(() => themeFromEnum(themeEnum), [themeEnum]);
 
     const onThemeChange = useCallback(() => {
@@ -64,7 +68,9 @@ const App: React.FC = props => {
             <StyledThemeProvider theme={theme}>
                 <CssBaseline>
                     <StyleApp>
-                        <Button onClick={onThemeChange}>ダークモード</Button>
+                        <Button onClick={onThemeChange}>
+                            ダークモード (撤去予定)
+                        </Button>
                         {props.children}
                     </StyleApp>
                 </CssBaseline>

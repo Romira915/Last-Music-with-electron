@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ThemeEnum } from '../theme/Theme';
+import { combineReducers } from 'redux';
+import { ThemeEnum } from '../../theme/Theme';
+import audioPlayerSettingsSlice from './audioPlayerSettingsSlice';
 
 // export const Theme = {
 //     Light: 'Light',
@@ -9,15 +11,15 @@ import { ThemeEnum } from '../theme/Theme';
 // // 以下は type Card = "clubs" | "diamonds" | "hearts" | "spades" と同じ
 // type Theme = typeof Theme[keyof typeof Theme];
 
-export interface Settings {
+export interface GeneralSettings {
     theme: ThemeEnum;
 }
 
-const initSettingsState: Settings = {
+const initSettingsState: GeneralSettings = {
     theme: ThemeEnum.Dark,
 };
 
-const settingSlice = createSlice({
+const generalSettingSlice = createSlice({
     name: 'settings',
     initialState: initSettingsState,
     reducers: {
@@ -27,6 +29,6 @@ const settingSlice = createSlice({
     },
 });
 
-export const { changeTheme } = settingSlice.actions;
+export const { changeTheme } = generalSettingSlice.actions;
 
-export default settingSlice;
+export default generalSettingSlice;
