@@ -145,3 +145,11 @@ Cargo.lock
 # End of https://www.toptal.com/developers/gitignore/api/react,rust,node
 
 build/
+
+# Media Contents
+**/*.jpg
+**/*.png
+**/*.mp3
+**/*.mp4
+**/*.m4a
+**/*.flac

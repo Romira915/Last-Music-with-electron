@@ -1,12 +1,24 @@
 import { app, BrowserWindow, ipcMain, dialog, Menu, session } from 'electron';
 import path from 'path';
-import os from 'os';
+import * as isDev from 'electron-is-dev';
+import fs from 'fs';
 
-require('electron-reload')(path.join(process.cwd(), 'build'), {
-    electron: path.join(process.cwd(), 'node_modules', '.bin', 'electron.cmd'),
-});
+// TODO Priority:middle デバックビルドとリリースビルドをソースコードの変更なく実行できるようにする．現段階では不十分．
+if (isDev) {
+    require('electron-reload')(path.join(process.cwd(), 'build'), {
+        electron: path.join(
+            process.cwd(),
+            'node_modules',
+            '.bin',
+            'electron.cmd',
+        ),
+    });
+}
 
 const native = require('../native');
+// const musicPlayer = new native.MusicPlayer(
+//     'C:/Users/Yudai/workspace/Project/Last-Music/01 Fight oh! MIRAI oh!.flac',
+// );
 
 // セキュアな Electron の構成
 // 参考: https://qiita.com/pochman/items/64b34e9827866664d436
@@ -21,6 +33,7 @@ const createWindow = (): void => {
             nodeIntegrationInWorker: false,
             contextIsolation: true,
             preload: path.join(__dirname, 'preload.js'),
+            devTools: isDev,
         },
     });
 
@@ -32,8 +45,10 @@ const createWindow = (): void => {
         mainWindow = null;
     });
 
-    // 開発者ツールを起動する
-    mainWindow.webContents.openDevTools();
+    if (isDev) {
+        // 開発者ツールを起動する
+        mainWindow.webContents.openDevTools();
+    }
 };
 
 // Electronの起動準備が終わったら、ウィンドウを作成する。

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import ReactDOM from 'react-dom';
 import {
     Paper,
@@ -14,54 +14,80 @@ import {
     CssBaseline,
     ButtonGroup,
     Checkbox,
+    AppBar,
+    Toolbar,
+    Tabs,
+    Tab,
 } from '@material-ui/core';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import {
+    createMuiTheme,
+    ThemeProvider as MaterialThemeProvider,
+} from '@material-ui/core/styles';
 import { Provider, useDispatch, useSelector } from 'react-redux';
-import Store from './Store';
-import UserForm from './components/UserForm';
-import PlayButton from './components/PlayButton';
-import api from './api/api';
-import ISettings from './states/ISettings';
-import { IState } from './states/IState';
-import { changeSettingsAction } from './actions/SettingsActions';
-import DarkTheme from './theme/DarkTheme';
-import LightTheme from './theme/LightTheme';
-import MediaControlPanel from './components/MediaControl';
+import {} from './api/api';
+import AudioPlayerPanel from './components/AudioPlayer/AudioPlayer';
+import MenuIcon from '@material-ui/icons/Menu';
+import LibraryList from './components/LibraryList';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import { StyleApp, StyleCardMedia } from './styles/style';
+import LibraryPanel from './components/LibraryPanel';
+import store, { persistor, RootState, useAppDispatch } from './store';
+import {
+    changeTheme,
+    GeneralSettings,
+} from './slice/settings/generalSettingsSlice';
+import { darkTheme, lightTheme, ThemeEnum, themeFromEnum } from './theme/Theme';
+import { PersistGate } from 'redux-persist/integration/react';
 
-const container = document.getElementById('root');
+const container = document.getElementById('app');
 
 const show = () => {
-    window.api.hello();
+    window.Api.hello();
     console.log('Button Click');
 };
 
-const Root: React.FC = props => {
-    const { theme } = useSelector<IState, ISettings>(a => a.settings);
-    const dispatch = useDispatch();
+const App: React.FC = props => {
+    const dispatch = useAppDispatch();
+    const themeEnum = useSelector<RootState, GeneralSettings>(
+        state => state.settings.generalSettings,
+    ).theme;
+    const theme = useMemo(() => themeFromEnum(themeEnum), [themeEnum]);
 
     const onThemeChange = useCallback(() => {
         dispatch(
-            changeSettingsAction({
-                theme: theme === LightTheme ? DarkTheme : LightTheme,
-            }),
+            changeTheme(
+                themeEnum === ThemeEnum.Light
+                    ? ThemeEnum.Dark
+                    : ThemeEnum.Light,
+            ),
         );
-    }, [theme]);
+    }, [themeEnum]);
 
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline>
-                <Button onClick={onThemeChange}>ダークモード</Button>
-                {props.children}
-            </CssBaseline>
-        </ThemeProvider>
+        <MaterialThemeProvider theme={theme}>
+            <StyledThemeProvider theme={theme}>
+                <CssBaseline>
+                    <StyleApp>
+                        <Button onClick={onThemeChange}>
+                            ダークモード (撤去予定)
+                        </Button>
+                        {props.children}
+                    </StyleApp>
+                </CssBaseline>
+            </StyledThemeProvider>
+        </MaterialThemeProvider>
     );
 };
 
 ReactDOM.render(
-    <Provider store={Store}>
-        <Root>
-            <MediaControlPanel></MediaControlPanel>
-        </Root>
+    <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+            <App>
+                <AudioPlayerPanel />
+
+                <LibraryPanel />
+            </App>
+        </PersistGate>
     </Provider>,
     container,
 );
