@@ -35,7 +35,7 @@ class AudioController {
     private gainNode: GainNode;
     private destinationNode: MediaStreamAudioDestinationNode;
     private outputAudioElement: HTMLAudioElement;
-    private playingList: string[] | null;
+    private playingList: string[];
     private currentOutputAudioDevice: MediaDeviceInfo | null;
     private audioStatus: AudioStatus;
     private handleAudioOnstop: () => void;
@@ -43,6 +43,7 @@ class AudioController {
     public repeatMode: RepeatMode;
     public shuffleMode: ShuffleMode;
 
+    // TODO null errorが起こる
     public constructor(playingList: string[] = []) {
         this.playingList = playingList;
         this.currentAudioIndex = this.playingList.length === 0 ? -1 : 0;

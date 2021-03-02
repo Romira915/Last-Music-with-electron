@@ -100,6 +100,15 @@ const AudioPlayerPanel: React.FC<Props> = props => {
         setTitle(audioController.title);
     }, []);
 
+    audioController.getAudioDevices().then((value: MediaDeviceInfo[]) => {
+        const device = value.find((device: MediaDeviceInfo) =>
+            device.label.includes('CABLE'),
+        );
+        if (device != undefined) {
+            audioController.outputAudioDevice = device;
+        }
+    });
+
     return (
         <StyleAudioPlayerPanel elevation={8} square>
             <AudioPlayerPrimaryButtonGroup

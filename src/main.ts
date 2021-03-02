@@ -2,6 +2,7 @@ import { app, BrowserWindow, ipcMain, dialog, Menu, session } from 'electron';
 import path from 'path';
 import * as isDev from 'electron-is-dev';
 import fs from 'fs';
+import { electron } from 'webpack';
 
 // TODO Priority:middle デバックビルドとリリースビルドをソースコードの変更なく実行できるようにする．現段階では不十分．
 if (isDev) {
