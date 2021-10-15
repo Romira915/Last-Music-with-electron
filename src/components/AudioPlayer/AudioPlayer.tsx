@@ -17,9 +17,11 @@ import {
 const THRESHOLD_OF_TO_PREVIOUS: number = 0.02;
 
 const media = [
-    '../01 Fight oh! MIRAI oh!.flac',
-    '../01 Aile To Yell.mp3',
-    '../02 シャンランラン.mp4',
+    '../sample/sample1.mp3',
+    '../sample/sample2.flac',
+    '../sample/sample3.aac',
+    '../sample/sample4.ogg',
+    '../sample/sample5.wav',
 ];
 const audioController = new AudioController(media);
 
