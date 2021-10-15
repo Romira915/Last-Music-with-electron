@@ -147,6 +147,7 @@ Cargo.lock
 build/
 
 # Media Contents
+**/sample/
 **/*.jpg
 **/*.png
 **/*.mp3
