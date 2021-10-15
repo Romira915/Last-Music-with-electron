@@ -12,10 +12,10 @@ crate-type = ["cdylib"]
 name = "native"
 
 [build-dependencies]
-neon-build = "0.7.1"
+neon-build = "0.8.1"
 
 [dependencies]
 cpal = "0.13.1"
 music_manager = {path = "./music-manager"}
-neon = "0.7.1"
+neon = "0.8.1"
 rodio = "0.13.0"

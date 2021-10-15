@@ -1,5 +1,6 @@
 import { ThreeSixtyOutlined } from '@material-ui/icons';
 import { AudioPlayerSettings } from '../../slice/settings/audioPlayerSettingsSlice';
+import * as musicMetadata from 'music-metadata-browser';
 
 export const AudioStatus = {
     Playing: 'Playing',

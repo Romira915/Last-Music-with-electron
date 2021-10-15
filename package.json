@@ -19,7 +19,7 @@
     ]
   },
   "scripts": {
-    "start": "electron .",
+    "start": "chcp 65001 && electron .",
     "build": "run-s build.rs build.ts",
     "build.main": "tsc",
     "build.render": "webpack",
@@ -42,6 +42,8 @@
     "css-loader": "^5.0.1",
     "eslint-loader": "^4.0.2",
     "html-webpack-plugin": "^5.0.0",
+    "music-metadata": "^7.8.8",
+    "music-metadata-browser": "^2.2.7",
     "react": "^17.0.1",
     "react-datepicker": "^3.4.1",
     "react-dom": "^17.0.1",
