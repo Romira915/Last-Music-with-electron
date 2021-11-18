@@ -68,9 +68,9 @@ const App: React.FC = props => {
             <StyledThemeProvider theme={theme}>
                 <CssBaseline>
                     <StyleApp>
-                        <Button onClick={onThemeChange}>
+                        {/* <Button onClick={onThemeChange}>
                             ダークモード (撤去予定)
-                        </Button>
+                        </Button> */}
                         {props.children}
                     </StyleApp>
                 </CssBaseline>
