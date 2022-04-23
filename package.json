@@ -28,12 +28,18 @@
     "package:win": "electron-builder build -w",
     "debug.build": "run-s build start",
     "debug.watch": "run-p devtools watch start",
-    "debug.buildrs.watch": "run-s build.rs debug.watch",
+    "debug.buildrs.watch": "run-s build-debug debug.watch",
     "watch.webpack": "webpack --watch",
     "watch.tsc": "tsc --watch",
     "watch": "run-p watch.webpack watch.tsc",
     "devtools": "react-devtools",
-    "release": "run-p build package:win"
+    "release": "run-p build package:win",
+    "build.neon": "cargo-cp-artifact -nc index.node -- cargo build --message-format=json-render-diagnostics",
+    "build-debug": "npm run build.neon --",
+    "build-release": "npm run build.neon -- --release",
+    "install": "npm run build-release",
+    "test": "cargo test",
+    "format": "rome format ."
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -67,6 +73,7 @@
     "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.14.2",
     "@typescript-eslint/parser": "^4.14.2",
+    "cargo-cp-artifact": "^0.1",
     "electron": "^11.2.2",
     "electron-build-env": "^0.2.0",
     "electron-builder": "^22.9.1",
@@ -83,6 +90,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.2.1",
     "react-devtools": "^4.10.1",
+    "rome": "^0.4.2-next",
     "ts-loader": "^8.0.15",
     "typescript": "^4.1.3",
     "webpack": "^5.20.2",
@@ -107,5 +115,6 @@
       "native/index.node",
       "build/**/*"
     ]
-  }
+  },
+  "repository": "git@github.com:Romira915/Last_Music.git"
 }
